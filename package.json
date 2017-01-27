@@ -1,0 +1,24 @@
+{
+  "name": "soingest",
+  "version": "1.0.0",
+  "description": "Stack Overflow data ingest",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ibm-cds-labs/soingest.git"
+  },
+  "scripts": {
+    "mocha": "./node_modules/.bin/mocha test -t 5000",
+    "test": "bash scripts/run_couchdb_on_travis.sh; npm run mocha; bash scripts/stop_couchdb_on_travis.sh"
+  },
+  "author": "Glynn Bird <glynn.bird@gmail.com>",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "cloudant": "^1.7.0",
+    "stackexchange": "^0.4.0"
+  },
+  "devDependencies": {
+    "dotenv": "^4.0.0",
+    "mocha": "^3.2.0"
+  }
+}
