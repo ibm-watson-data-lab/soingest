@@ -8,11 +8,8 @@ It consists of the following OpenWhisk actions:
 - store - for each changed question either creates or updates the data in a Cloudant database
 - notify - turns a question object into Slack message
 
-
 ```
   TIMER --> collector --> MESSAGEHUB
   TIMER --> collector --> MESSAGEHUB
   MESSAGEHUB ---> store --> notify --> SLACK
-```
-
-  
+```  
