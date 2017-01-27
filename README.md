@@ -1,5 +1,7 @@
 # soingest
 
+[![Build Status](https://travis-ci.org/ibm-cds-labs/soingest.svg?branch=master)](https://travis-ci.org/ibm-cds-labs/soingest)
+
 A Stack Overflow data ingest tool written for OpenWhisk.
 
 It consists of the following OpenWhisk actions:
