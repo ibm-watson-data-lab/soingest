@@ -5,6 +5,6 @@ services:
 - docker
 env:
   global:
-    - CLOUDANTURL=http://localhost:5984
-    - DBNAME=so
+    - CLOUDANTURL="http://localhost:5984"
+    - DBNAME="so"
     secure: EEziUum+mhhpouNuKjFE+toO7qn/IwX8wObWWQPRKfzgOHmv5SvD9lXwHDERjExC6T0MepcjNJrl+4ZbdxjzRtR20MC00RJIzg+UQdRCp3ZlzE4kT/ukOHXOdKkww63Qyt2SH5Knav7gQKoLbnhM2HF84Uo9CL2N34b8TR8+y2sHibFdEloNP0AMiaEzhiGFLFk/5qW1X2mlNPkbz3ino5IBlxmooFwm8tCUIk26M9haNSXZW3HFvUgJ4QhyzENf+X6CUQj9/umgV+nBZ3S9bOskHjdwCvJODigbVXd0bCs6dRWFjatSH0VcTgbNKuF9i/HSSJMRUvMOGt5DiUE3t43foRe7oWr6MMbWagg2O7lae0OddFSXMha4f5LNChZr+7Dl2stGkhk5QGqwt6q7C0QXX3bOJjTQRqhPL7c599ZnYBAZ658zqJ9x4Xn5oGnXAQrsXytSG16z7KeF7cqd6rUjbiz4SsLyrXzTWWWvNKqy01uvyw4OlYfRRuUuwVaig9k340zRj/PaaCRJidYVeVSR0BOzMOTzPGy8/JORk01dovDqabWd1d/OfkiQY1CL0nf0OkWFsBnYFS4A2IwlzTscOrvhADufa/fGE2pmjDqE7T9EgjgiE13t0Y1gXlVPlIJli05Z6EVzfldF6xKjcF19xkiTIqgk3EU6pbOQV7A=
