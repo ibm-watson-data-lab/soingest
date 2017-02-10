@@ -1,0 +1,7 @@
+{
+    "name": "stackoverflow-pubwriter",
+    "main": "pubwriter.js",
+    "dependencies": {
+        "message-hub-rest": "^1.2"
+    }
+}

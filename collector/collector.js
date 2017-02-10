@@ -29,7 +29,10 @@ function main(message) {
        if (err) {
          return reject(err);
        }
-       resolve(body);
+       if (!body.items) {
+         throw(new Error('missing items in response'));
+       }
+       resolve({ items: body.items });
      }); 
   });
 }
