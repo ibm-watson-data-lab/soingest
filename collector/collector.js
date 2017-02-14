@@ -29,6 +29,13 @@ function main(message) {
        if (err) {
          return reject(err);
        }
+       console.log("tags: " + JSON.stringify(message.tags));
+       console.log("status: " + response.statusCode);
+       console.log(body.items.length + " questions fetched");
+
+       if (response.statusCode != 200) {
+         throw(new Error('status code not OK (got a ' + response.statusCode + ')'));
+       }
        if (!body.items) {
          throw(new Error('missing items in response'));
        }

@@ -24,7 +24,6 @@ OUTPUT:
 */
 
 function main(message) {
-
   // check for required parameters
   var requiredParams = ['dbname', 'cloudantURL', 'question'];
   var errs = [];
@@ -51,9 +50,11 @@ function main(message) {
   return db.get(id).then(function(data) {
     // if so, update the question
     data.question = message.question;
+    data.status = 'updated';
 
     // and write it back
     return db.insert(data).then(function(reply) {
+      console.log("Question " + id + " successfully updated");
       return data;
     });
   }).catch(function(err) {
@@ -70,9 +71,8 @@ function main(message) {
     return db.insert(obj).then(function(data) {
 
       // pass on the new object to the next action
+      console.log("Question " + id + " created");
       return obj;
     });
   });
 }
-
-module.exports = main;
