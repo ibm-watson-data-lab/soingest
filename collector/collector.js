@@ -8,6 +8,13 @@ function main(message) {
     
      // create API request
      var now = new Date();
+     var tagged = '';
+     if(Array.isArray(message.tags)) {
+       tagged = message.tags.join(';');
+     } else {
+       tagged = message.tags;
+     }
+
      var r = {
        method: 'get',
        url: 'https://api.stackexchange.com/2.2/search',
@@ -17,7 +24,7 @@ function main(message) {
          fromdate: Math.floor((now.getTime()/1000)-(1*24*60*60)),
          order: 'asc',
          sort: 'activity',
-         tagged: message.tags,
+         tagged: tagged,
          filter: 'default'
        },
        json: true,
@@ -31,14 +38,15 @@ function main(message) {
        }
        console.log("tags: " + JSON.stringify(message.tags));
        console.log("status: " + response.statusCode);
-       console.log(body.items.length + " questions fetched");
 
        if (response.statusCode != 200) {
+         console.log(body);
          throw(new Error('status code not OK (got a ' + response.statusCode + ')'));
        }
        if (!body.items) {
          throw(new Error('missing items in response'));
        }
+       console.log(body.items.length + " questions fetched");
        resolve({ items: body.items });
      }); 
   });
