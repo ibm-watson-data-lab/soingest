@@ -14,4 +14,4 @@ It consists of the following OpenWhisk actions (all of them in the `stackoverflo
 * `notifier` will notify slack for any data it gets that has a status of new
 
 
-**Quick Start** run `./deploy.sh` and check that the `cloudantURL` and `dbname` parameters are set on the `stackoverflow` package.  Then invoke `stackoverflow/socron` with your desired `tags` param
+**Quick Start** run `./deploy.sh` and check that the `cloudantURL`, `slackURL`, and `dbname` parameters are set on the `stackoverflow` package (optional: also set the `apikey` parameter to a valid StackOverflow API key).  Then invoke `stackoverflow/socron` with your desired `tags` param

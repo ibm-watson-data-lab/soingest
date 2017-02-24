@@ -1,9 +1,34 @@
 function main(data) {
+  return new Promise(function(resolve, reject) {
+    var request = require('request');
+
     if(data.status == 'new') {
-      console.log("Send slack notification for new question: " + data.question.question_id+ " (tagged: " + data.question.tags + ")");
-      return {payload: "Notified"};
+      var message = "New question: <" + data.question.link + "|" + data.question.title + "> (tagged: " + data.question.tags + ")";
+      console.log(message);
+
+      var options = {
+          "text": message,
+          "icon_emoji": ":stackoverflow:"
+      };
+
+      request({
+        url: data.slackURL,
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(options)
+      }, function (err, response, body) {
+        if(err) {
+          console.log(err);
+          reject ({payload: "Failed"});
+        } else {
+          console.log("Status: " + response.statusCode);
+          console.log("Response Body: " + body);
+          resolve( {payload: "Notified"} );
+        }
+      });
+
     } else {
-      return {payload: "Comnplete"};
+      resolve( {payload: "Complete"} );
     }
-    
+  });
 }
