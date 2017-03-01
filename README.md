@@ -13,5 +13,6 @@ It consists of the following OpenWhisk actions (all of them in the `stackoverflo
 * `storer` requires the parameters `cloudantURL` and `dbname` to be set (usually on the package).  It writes every question to the database with the `question_id` as the ID, updating the existing question record if we already have one.  The question is in a field called `question` in the data object, and we also add `status` and `owner`.  Status is `new` if we inserted it and `updated` if we updated it because the ID already existed.
 * `notifier` will notify slack for any data it gets that has a status of new
 
+![schematic](https://raw.githubusercontent.com/ibm-cds-labs/soingest/master/img/schematic.png)
 
 **Quick Start** run `./deploy.sh` and check that the `cloudantURL`, `slackURL`, and `dbname` parameters are set on the `stackoverflow` package (optional: also set the `apikey` parameter to a valid StackOverflow API key).  Then invoke `stackoverflow/socron` with your desired `tags` param.  To set the setup configured rules so that the actions run periodically, run `./rules.sh`.
