@@ -86,7 +86,8 @@ function main(message) {
         throw new Error('no action required - same data received.');
       }
 
-      // if we're here we need to update the question
+      // if we're here we need to update the question - sort the tags first
+      message.question.tags = message.question.tags.sort();
       data.question = message.question;
       data.status = 'updated';
 
