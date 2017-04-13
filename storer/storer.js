@@ -23,6 +23,15 @@ OUTPUT:
   }
 */
 
+// fetch document or return null
+function getDoc(db, id) {
+  return new Promise(function(resolve, reject) {
+    db.get(id).then(resolve).catch(function(err) {
+      resolve(null);
+    });
+  });
+};
+
 function main(message) {
   // check for required parameters
   var requiredParams = ['dbname', 'cloudantURL', 'question'];
@@ -47,32 +56,48 @@ function main(message) {
   var id = message.question.question_id.toString();
  
   // see if there is pre-existing Cloudant document
-  return db.get(id).then(function(data) {
-    // if so, update the question
-    data.question = message.question;
-    data.status = 'updated';
+  return getDoc(db, id).then(function(data) {
 
-    // and write it back
-    return db.insert(data).then(function(reply) {
-      console.log("Question " + id + " successfully updated");
-      return data;
-    });
-  }).catch(function(err) {
+    // if there was no pre-existing document
+    if (data === null) {
+      // create new question object
+      message.question.tags = message.question.tags.sort();
+      var obj = {
+        _id: id,
+        type: 'question',
+        owner: null,
+        status: 'new',
+        question: message.question
+      };
+    
+      // write it to the database
+      return db.insert(obj).then(function(data) {
 
-    // otherwise, create new question object
-    var obj = {
-      _id: id,
-      owner: null,
-      status: 'new',
-      question: message.question
-    };
-   
-    // write it to the database
-    return db.insert(obj).then(function(data) {
+        // pass on the new object to the next action
+        console.log("Question " + id + " created");
+        return obj;
+      });
+    } else {
+      
+      // update the existing document
 
-      // pass on the new object to the next action
-      console.log("Question " + id + " created");
-      return obj;
-    });
+      // don't bother updating questions we have already saved
+      if (message.question.last_activity_date <= data.question.last_activity_date) {
+        throw new Error('no action required - same data received.');
+      }
+
+      // if we're here we need to update the question - sort the tags first
+      message.question.tags = message.question.tags.sort();
+      data.question = message.question;
+      data.status = 'updated';
+
+      // and write it back
+      return db.insert(data).then(function(reply) {
+        console.log("Question " + id + " successfully updated");
+        return data;
+      });
+
+    }
+
   });
 }
