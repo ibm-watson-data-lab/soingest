@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./wsk package update $WSK_PACKAGE
+./wsk package update $WSK_PACKAGE -p cloudantURL $CLOUDANT_URL -p dbname $QUESTIONS_DB -p slackURL $SLACK_URL -p apikey $STACKOVERFLOW_API_KEY
 
 ./wsk action update $WSK_PACKAGE/collector collector/collector.js 
 
