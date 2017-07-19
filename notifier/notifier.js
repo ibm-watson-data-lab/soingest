@@ -33,6 +33,31 @@ function main(data) {
         });
 
       }
+
+      if(send_to_hubot) {
+        var hardcoded_hubot_url = "http://a5a9640a.ngrok.io" + "/hubot/stackoverflow/incoming";
+        var event = {
+          type: "new-question",
+          data: data,
+          a: 22
+        };
+
+        request({
+          url: hardcoded_hubot_url,
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify(event)
+        }, function (err, response, body) {
+          if(err) {
+            console.log(err);
+            reject ({payload: "Failed"});
+          } else {
+            console.log("Status: " + response.statusCode);
+            console.log("Response Body: " + body);
+            resolve( {payload: "Notified"} );
+          }
+        });
+      }
     } else {
       resolve( {payload: "Complete"} );
     }
