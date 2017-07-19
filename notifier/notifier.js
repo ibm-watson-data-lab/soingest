@@ -8,7 +8,7 @@ function main(data) {
 
       var options = {
           "text": message,
-          "icon_emoji": ":stackoverflow:"
+          "icon_emoji": ":postit:"
       };
 
       request({
