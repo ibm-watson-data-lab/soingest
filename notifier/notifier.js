@@ -35,7 +35,7 @@ function main(data) {
       }
 
       if(send_to_hubot) {
-        var hardcoded_hubot_url = "http://a5a9640a.ngrok.io" + "/hubot/stackoverflow/incoming";
+        var hardcoded_hubot_url = "http://sobot.mybluemix.net" + "/hubot/stackoverflow/incoming";
         var event = {
           type: "new-question",
           data: data,
