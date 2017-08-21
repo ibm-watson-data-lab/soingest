@@ -3,6 +3,7 @@ var request = require('request');
 // Parameters
 //   apikey - StackOverflow API key
 //   tags - list of tags e.g. "cloudant;redis"
+//   search_type - either "and" or "or" (default = "or")
 function main(message) {
   return new Promise(function(resolve, reject) {
     
@@ -15,9 +16,16 @@ function main(message) {
        tagged = message.tags;
      }
 
+     // keep the original default search type of OR
+     var url = 'https://api.stackexchange.com/2.2/search';
+     if(message.search_type && message.search_type.toLowerCase() == "and") {
+         url = 'https://api.stackexchange.com/2.2/questions';
+         console.log("Search type is AND");
+     }
+
      var r = {
        method: 'get',
-       url: 'https://api.stackexchange.com/2.2/search',
+       url: url,
        qs: {
          key: message.apikey,
          site: 'stackoverflow',
