@@ -33,7 +33,7 @@ function main(message) {
          order: 'asc',
          sort: 'activity',
          tagged: tagged,
-         filter: 'default'
+         filter: 'withbody'
        },
        json: true,
        gzip: true
