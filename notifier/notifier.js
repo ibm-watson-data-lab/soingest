@@ -3,8 +3,8 @@ function main(data) {
     var request = require('request');
 
     // primitive feature toggles to transition between notification types
-    var send_to_slack = false;
-    var send_to_hubot = true;
+    var send_to_slack = true;
+    var send_to_hubot = false;
 
     if(data.status == 'new') {
       if(send_to_slack) {
