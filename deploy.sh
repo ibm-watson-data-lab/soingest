@@ -29,6 +29,9 @@ set -x
 ./Bluemix_CLI/bin/bluemix login --apikey $BXIAM
 ./Bluemix_CLI/bin/bluemix target -o $CF_ORGANIZATION -s $CF_SPACE
 
+# Bring in the rules next
+./rules.sh
+
 ./Bluemix_CLI/bin/bluemix wsk package update $WSK_PACKAGE -p cloudantURL $CLOUDANT_URL -p dbname $QUESTIONS_DB -p slackURL $SLACK_URL -p apikey $STACKOVERFLOW_API_KEY
 
 ./Bluemix_CLI/bin/bluemix wsk action update $WSK_PACKAGE/collector collector/collector.js 
