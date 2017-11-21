@@ -28,19 +28,19 @@ if [ ${invocation_error} -eq 1 ]; then echo 'Aborting deployment.'; exit 1; fi
 ./Bluemix_CLI/bin/bluemix login --apikey $BXIAM
 ./Bluemix_CLI/bin/bluemix target -o $CF_ORGANIZATION -s $CF_SPACE
 
-./Bluemix_CLI/bin/bluemix/ wsk package update $WSK_PACKAGE -p cloudantURL $CLOUDANT_URL -p dbname $QUESTIONS_DB -p slackURL $SLACK_URL -p apikey $STACKOVERFLOW_API_KEY
+./Bluemix_CLI/bin/bluemix wsk package update $WSK_PACKAGE -p cloudantURL $CLOUDANT_URL -p dbname $QUESTIONS_DB -p slackURL $SLACK_URL -p apikey $STACKOVERFLOW_API_KEY
 
-./Bluemix_CLI/bin/bluemix/ wsk action update $WSK_PACKAGE/collector collector/collector.js 
+./Bluemix_CLI/bin/bluemix wsk action update $WSK_PACKAGE/collector collector/collector.js 
 
-./Bluemix_CLI/bin/bluemix/ wsk action update --kind nodejs:6 $WSK_PACKAGE/invoker invoker/invoker.js
+./Bluemix_CLI/bin/bluemix wsk action update --kind nodejs:6 $WSK_PACKAGE/invoker invoker/invoker.js
 
 # create a sequence of both actions
-./Bluemix_CLI/bin/bluemix/ wsk action update $WSK_PACKAGE/socron --sequence $WSK_PACKAGE/collector,$WSK_PACKAGE/invoker
+./Bluemix_CLI/bin/bluemix wsk action update $WSK_PACKAGE/socron --sequence $WSK_PACKAGE/collector,$WSK_PACKAGE/invoker
 
 
 # actions for store and notify, and a sequence for those
 
-./Bluemix_CLI/bin/bluemix/ wsk action update $WSK_PACKAGE/storer storer/storer.js
-./Bluemix_CLI/bin/bluemix/ wsk action update $WSK_PACKAGE/notifier notifier/notifier.js
+./Bluemix_CLI/bin/bluemix wsk action update $WSK_PACKAGE/storer storer/storer.js
+./Bluemix_CLI/bin/bluemix wsk action update $WSK_PACKAGE/notifier notifier/notifier.js
 
-./Bluemix_CLI/bin/bluemix/ wsk action update $WSK_PACKAGE/qhandler --sequence $WSK_PACKAGE/storer,$WSK_PACKAGE/notifier
+./Bluemix_CLI/bin/bluemix wsk action update $WSK_PACKAGE/qhandler --sequence $WSK_PACKAGE/storer,$WSK_PACKAGE/notifier
