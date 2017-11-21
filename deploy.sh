@@ -23,6 +23,7 @@ if [ -z ${SLACK_URL+x} ]; then echo 'Error: Environment variable SLACK_URL is un
 if [ ${invocation_error} -eq 1 ]; then echo 'Aborting deployment.'; exit 1; fi
 
 # login and set target
+set -x
 ./Bluemix_CLI/bin/bluemix config --check-version false
 ./Bluemix_CLI/bin/bluemix api $CF_API
 ./Bluemix_CLI/bin/bluemix login --apikey $BXIAM
