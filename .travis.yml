@@ -1,10 +1,18 @@
 language: node_js
+sudo: required
 node_js:
 - '6'
 services:
 - docker
-env:
-  global:
-  - CLOUDANTURL=http://localhost:5984
-  - DBNAME=so
-  - secure: ixBdgbYe/ayH2S90a6A0K2OtwtYeRDl+Tocl3ekUGoDzml75ctaxCIB0Izn3wU8RSpuO3oWnlWpnRN35TrDdP4vUjK+ejKtDLs9CF7NF51uS3FslFvrNy5xX4ZD2cUCkCpps1CM8Gwl9O07Z8/Qb/X8CDNydnK9gQ/xXmm6cO8IBnZhvXSymzzT2LAt/jt8Grtz0hfl3g2RE4kPGMjKT2mIQ3iU8KDaS4EBrVIfIXom4Zy3tnN+t2kpVOhLKyzV8XKbIERGbreOvrOFFFVCgjNHbD6QbfUjOGmZb+zfpTWAVPFymHjHflhPfoHhJBksTEi4eE8KTPFDe2EYZmZtIayiHOacgAvWzVI/nXRSwHpUsqg/3czwxYbfHX4CsiBaimCvoildQl94t1IRjCfhTQIL1KUMGkElnLhviYeK2bT5rEgjSLNv7TlsNbx0At/1SO7eSYb/l1AcAWYtB12nYXOp4Ta/QC5OewOVFA7wF5QKzfT630uY0Ezxj7PJ0IvU7FbDuAfdUdWDLmhhNVvkOpVgALX4cKiErrONOzDM27hy099KH8rtUzWbLZ6Q0XVvcSZcVgFMfLFweWKLZ4elbz8aBiGqYL0f4iJO1XW/V8IF/UDVeA6dHZcuatV6WaHJxrA6MKzswU5DCQuG8Q3w3ADiOuHB+on+vvR3kw9M+YnU=
+before_deploy: 
+- curl -L https://clis.ng.bluemix.net/download/bluemix-cli/0.6.1/linux64 | tar -zx
+- chmod -R u+x ./Bluemix_CLI/bin
+- chmod +x ./*.sh
+- ./Bluemix_CLI/bin/bluemix plugin install Cloud-Functions -r Bluemix
+deploy: 
+  provider: script
+  script: ./deploy.sh
+  on:
+    repo: ibm-watson-data-lab/soingest
+    branch: master
+  skip_cleanup: true
