@@ -35,7 +35,7 @@ function main(data) {
       }
 
       if(send_to_hubot) {
-        var hubot_url = process.env.HUBOT_URL + "/hubot/stackoverflow/incoming";
+        var hubot_url = data.hubotURL + "/hubot/stackoverflow/incoming";
         var event = {
           type: "new-question",
           data: data,

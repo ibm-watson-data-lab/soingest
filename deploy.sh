@@ -19,6 +19,7 @@ if [ -z ${WSK_PACKAGE+x} ]; then echo 'Error: Environment variable WSK_PACKAGE i
 if [ -z ${CLOUDANT_URL+x} ]; then echo 'Error: Environment variable CLOUDANT_URL is undefined.'; invocation_error=1; fi
 if [ -z ${QUESTIONS_DB+x} ]; then echo 'Error: Environment variable QUESTIONS_DB is undefined.'; invocation_error=1; fi
 if [ -z ${SLACK_URL+x} ]; then echo 'Error: Environment variable SLACK_URL is undefined.'; invocation_error=1; fi
+if [ -z ${HUBOT_URL+x} ]; then echo 'Error: Environment variable HUBOT_URL is undefined.'; invocation_error=1; fi
 
 if [ ${invocation_error} -eq 1 ]; then echo 'Aborting deployment.'; exit 1; fi
 
@@ -32,7 +33,7 @@ set -x
 # Bring in the rules next
 ./rules.sh
 
-./Bluemix_CLI/bin/bluemix wsk package update $WSK_PACKAGE -p cloudantURL $CLOUDANT_URL -p dbname $QUESTIONS_DB -p slackURL $SLACK_URL -p apikey $STACKOVERFLOW_API_KEY
+./Bluemix_CLI/bin/bluemix wsk package update $WSK_PACKAGE -p cloudantURL $CLOUDANT_URL -p dbname $QUESTIONS_DB -p slackURL $SLACK_URL -p apikey $STACKOVERFLOW_API_KEY -p hubotURL $HUBOT_URL
 
 ./Bluemix_CLI/bin/bluemix wsk action update $WSK_PACKAGE/collector collector/collector.js 
 
