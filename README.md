@@ -16,3 +16,5 @@ It consists of the following OpenWhisk actions (all of them in the `stackoverflo
 ![schematic](https://raw.githubusercontent.com/ibm-cds-labs/soingest/master/img/schematic.png)
 
 **Quick Start** run `./deploy.sh` and check that the `cloudantURL`, `slackURL`, and `dbname` parameters are set on the `stackoverflow` package (optional: also set the `apikey` parameter to a valid StackOverflow API key).  Then invoke `stackoverflow/socron` with your desired `tags` param.  To set the setup configured rules so that the actions run periodically, run `./rules.sh`.
+
+To deploy to IBM Cloud, there are [TravisCI setup instructions on the wiki](https://github.com/ibm-watson-data-lab/soingest/wiki/TravisCI-setup).
