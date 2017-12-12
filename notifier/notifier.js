@@ -38,8 +38,7 @@ function main(data) {
         var hardcoded_hubot_url = "http://sobot.mybluemix.net" + "/hubot/stackoverflow/incoming";
         var event = {
           type: "new-question",
-          data: data,
-          a: 22
+          data: data
         };
 
         request({
