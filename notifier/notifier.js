@@ -3,8 +3,8 @@ function main(data) {
     var request = require('request');
 
     // primitive feature toggles to transition between notification types
-    var send_to_slack = true;
-    var send_to_hubot = false;
+    var send_to_slack = false;
+    var send_to_bot = true;
 
     if(data.status == 'new') {
       if(send_to_slack) {
@@ -34,16 +34,15 @@ function main(data) {
 
       }
 
-      if(send_to_hubot) {
-        var hardcoded_hubot_url = "http://sobot.mybluemix.net" + "/hubot/stackoverflow/incoming";
+      if(send_to_bot) {
+        var bot_url = data.botURL + "/stackoverflow/incoming";
         var event = {
           type: "new-question",
-          data: data,
-          a: 22
+          data: data
         };
 
         request({
-          url: hardcoded_hubot_url,
+          url: bot_url,
           method: "POST",
           headers: {"Content-Type": "application/json"},
           body: JSON.stringify(event)
