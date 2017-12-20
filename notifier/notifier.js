@@ -35,14 +35,14 @@ function main(data) {
       }
 
       if(send_to_hubot) {
-        var hardcoded_hubot_url = "http://sobot.mybluemix.net" + "/hubot/stackoverflow/incoming";
+        var hubot_url = data.hubotURL + "/hubot/stackoverflow/incoming";
         var event = {
           type: "new-question",
           data: data
         };
 
         request({
-          url: hardcoded_hubot_url,
+          url: hubot_url,
           method: "POST",
           headers: {"Content-Type": "application/json"},
           body: JSON.stringify(event)
