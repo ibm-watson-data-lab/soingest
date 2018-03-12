@@ -27,3 +27,10 @@
 ./Bluemix_CLI/bin/bluemix wsk rule update so_jupyterrule so_jupyter $WSK_PACKAGE/socron
 ./Bluemix_CLI/bin/bluemix wsk rule enable so_jupyterrule
 
+# watch events db changes feed
+./Bluemix_CLI/bin/bluemix wsk trigger delete so_dbchanges
+./Bluemix_CLI/bin/bluemix wsk trigger create so_dbchanges --feed /Lorna.Mitchell_dev/Bluemix_Lorna-Cloudant_Credentials-1/changes --param dbname events
+
+./Bluemix_CLI/bin/bluemix wsk rule update so_dbrule so_dbchanges $WSK_PACKAGE/db-doc-handler
+./Bluemix_CLI/bin/bluemix wsk rule enable so_dbrule
+
