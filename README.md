@@ -1,8 +1,8 @@
-# soingest
+# StackOverflow Dashboard Data Ingestor
 
 [![Build Status](https://travis-ci.org/ibm-watson-data-lab/soingest.svg?branch=master)](https://travis-ci.org/ibm-watson-data-lab/soingest)
 
-A Stack Overflow data ingest tool written for OpenWhisk.
+A Stack Overflow data ingest tool written for IBM Cloud Functions/OpenWhisk.
 
 It consists of the following OpenWhisk actions (all of them in the `stackoverflow` package)
 
