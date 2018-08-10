@@ -17,4 +17,20 @@ It consists of the following OpenWhisk actions (all of them in the `stackoverflo
 
 **Quick Start** run `./deploy.sh` and check that the `cloudantURL`, `slackURL`, and `dbname` parameters are set on the `stackoverflow` package (optional: also set the `apikey` parameter to a valid StackOverflow API key).  Then invoke `stackoverflow/socron` with your desired `tags` param.  To set the setup configured rules so that the actions run periodically, run `./rules.sh`.
 
+## Deployment
+
 To deploy to IBM Cloud, there are [TravisCI setup instructions on the wiki](https://github.com/ibm-watson-data-lab/soingest/wiki/TravisCI-setup).
+
+## Development Setup
+
+Look at `rules.sh` and `deploy.sh` - these are set up by default for Travis, so make some changes to use this stuff locally but do not commit your changes to git unless there's something we need to change on our central deploy.  Try this:
+ - remove the first half of `deploy.sh` so that we're not checking for env vars or installing `bx`
+ - update all the commands to use `bx` instead of a path to Bluemix_CLI
+
+Make sure your local `bx` tool is targetting your preferred org and workspace (since this is Cloud Functions, they don't run locally)
+
+Configure environment variables, you will need at least:
+ - `CLOUDANT_URL` to point to the URL (including creds) of the cloudant to use
+ - `QUESTIONS_DB` usually "questions"
+ - `BOT_URL` either the publicly-running bot (if you're not working on the bot) or the URL (try using ngrok) to the bot running on your local machine
+

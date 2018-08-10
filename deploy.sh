@@ -44,8 +44,12 @@ set -x
 
 
 # actions for store and notify, and a sequence for those
-
 ./Bluemix_CLI/bin/bluemix wsk action update $WSK_PACKAGE/storer storer/storer.js
 ./Bluemix_CLI/bin/bluemix wsk action update $WSK_PACKAGE/notifier notifier/notifier.js
 
 ./Bluemix_CLI/bin/bluemix wsk action update $WSK_PACKAGE/qhandler --sequence $WSK_PACKAGE/storer,$WSK_PACKAGE/notifier
+
+# handle Cloudant changes actions - use the built-in cloudant READ action
+./Bluemix_CLI/bin/bluemix wsk action update $WSK_PACKAGE/db-listener db-listener/db-listener.js
+
+./Bluemix_CLI/bin/bluemix wsk action update $WSK_PACKAGE/db-doc-handler --sequence /Lorna.Mitchell_dev/Bluemix_Lorna-Cloudant_Credentials-1/read,$WSK_PACKAGE/db-listener
